@@ -2,7 +2,7 @@
 
 **IntelliBulk** is a submission for the **OPay Innovation Challenge 2026**. It replaces the broken cash-envelope system for Nigerian school events (excursions, trips, outings) with OPay-powered contributions, an immutable SHA256 Trust Ledger, and AI-driven vendor matching.
 
-![IntelliBulk Preview](/preview.png)
+![IntelliBulk Preview](public/preview.png)
 
 ## Categories entered
 
