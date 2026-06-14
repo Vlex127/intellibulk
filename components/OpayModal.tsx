@@ -52,7 +52,7 @@ export function OpayModal({ open, onClose, amount, recipient, description, payer
       const res = await fetch("/api/opay/pay", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, recipient, description, payerName }),
+        body: JSON.stringify({ amount, recipient, description, payerName, payerEmail, eventId }),
       });
       const json = await res.json();
       if (!res.ok || json.error) {

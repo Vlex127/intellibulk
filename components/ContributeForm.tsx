@@ -19,8 +19,10 @@ export function ContributeForm({ eventId, amount, recipient, description, payerN
       <div className="rounded-xl p-4" style={{ background: "var(--slate-50)" }}>
         <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--slate-400)" }}>Payer</div>
         <div className="mt-1 text-sm font-bold" style={{ color: "var(--navy)" }}>{payerName}</div>
-        <div className="text-xs" style={{ color: "var(--slate-600)" }}>{payerEmail}</div>
-    </div>
+        {payerEmail && (
+          <div className="text-xs" style={{ color: "var(--slate-600)" }}>{payerEmail}</div>
+        )}
+     </div>
 
       <button
         type="button"
@@ -31,11 +33,11 @@ export function ContributeForm({ eventId, amount, recipient, description, payerN
         <span className="grid place-items-center w-7 h-7 rounded-md bg-white/20 text-white font-black text-xs">O</span>
         Pay {amount.toLocaleString("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 })} with OPay
         <span aria-hidden>→</span>
-    </button>
+     </button>
 
       <div className="text-center text-[11px]" style={{ color: "var(--slate-400)" }}>
         PIN-protected · receipt goes to Trust Ledger · refundable in 24h
-    </div>
+     </div>
 
       <OpayModal
         open={open}
@@ -47,6 +49,6 @@ export function ContributeForm({ eventId, amount, recipient, description, payerN
         payerEmail={payerEmail}
         eventId={eventId}
       />
-  </div>
+   </div>
   );
 }

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { DEMO_EVENT, VENDORS, seedLedgerIfNeeded } from "@/lib/data";
+import { DEMO_EVENT, VENDORS, formatNaira, seedLedgerIfNeeded } from "@/lib/data";
 import { matchVendors } from "@/lib/matcher";
 import { Card, LiveDot } from "@/components/Brand";
 
