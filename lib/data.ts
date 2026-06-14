@@ -1,8 +1,3 @@
-// IntelliBulk demo data seed. Single canonical event used by all four pages.
-// Replace with real DB queries in production bootcamp build.
-
-import { append, ledgerIsSeeded, markSeeded } from "@/lib/ledger";
-
 export type LineItem = { id: string; label: string; amount: number };
 
 export type OrganiserEvent = {
@@ -23,8 +18,8 @@ export type Vendor = {
   name: string;
   category: "bus" | "hostel" | "catering";
   capacity: number;
-  historyFit: number;       // 0..1 base history fit (used by stub)
-  pricePerUnit: number;     // abstract units of price
+  historyFit: number;
+  pricePerUnit: number;
   rating: number;
   completedEvents: number;
   city: string;
@@ -57,7 +52,7 @@ export const VENDORS: Vendor[] = [
     category: "bus",
     capacity: 60,
     historyFit: 0.95,
-    pricePerUnit: 1.0,        // fair — at premium threshold
+    pricePerUnit: 1.0,
     rating: 4.8,
     completedEvents: 142,
     city: "Lagos",
@@ -93,13 +88,19 @@ export const VENDORS: Vendor[] = [
 ];
 
 export const DEMO_PARENTS: { id: string; name: string; paid: number; status: "paid" | "partial" | "outstanding" }[] = [
-  { id: "par-001", name: "Engr. Bola Okeke",     paid: 15_000, status: "paid" },
-  { id: "par-002", name: "Mrs. Funke Adeyemi",   paid: 15_000, status: "paid" },
-  { id: "par-003", name: "Mr. Chidi Eze",        paid: 10_000, status: "partial" },
-  { id: "par-004", name: "Mrs. Ngozi Eze",       paid:  5_000, status: "partial" },
-  { id: "par-005", name: "Mr. Tunde Bello",      paid:  0,     status: "outstanding" },
-  { id: "par-006", name: "Mrs. Bisi Lawal",      paid:  0,     status: "outstanding" },
+  { id: "par-001", name: "Engr. Bola Okeke",       paid: 15_000, status: "paid" },
+  { id: "par-002", name: "Mrs. Funke Adeyemi",     paid: 15_000, status: "paid" },
+  { id: "par-003", name: "Mr. Chidi Eze",          paid: 10_000, status: "partial" },
+  { id: "par-004", name: "Mrs. Ngozi Eze",         paid:  5_000, status: "partial" },
+  { id: "par-005", name: "Mr. Tunde Bello",        paid:  0,     status: "outstanding" },
+  { id: "par-006", name: "Mrs. Bisi Lawal",        paid:  0,     status: "outstanding" },
+  { id: "par-007", name: "Dr. Adebayo Ogunlesi",   paid: 15_000, status: "paid" },
+  { id: "par-008", name: "Mr. Emeka Nwosu",        paid: 15_000, status: "paid" },
+  { id: "par-009", name: "Mrs. Chinwe Okafor",     paid: 12_000, status: "partial" },
+  { id: "par-010", name: "Mr. Segun Adegoke",      paid:  0,     status: "outstanding" },
 ];
+
+import { append, ledgerIsSeeded, markSeeded } from "@/lib/ledger";
 
 export function seedLedgerIfNeeded(): void {
   if (ledgerIsSeeded()) return;
@@ -110,9 +111,7 @@ export function seedLedgerIfNeeded(): void {
   markSeeded();
 }
 
-// Convenience: derived aggregated state.
 export function eventTotals(): { raised: number; outstanding: number; payout: number } {
-  // Raised = sum of all contribution amounts seeded.
   let raised = 0;
   for (const p of DEMO_PARENTS) raised += p.paid;
   const outstanding = DEMO_EVENT.targetNaira - raised;

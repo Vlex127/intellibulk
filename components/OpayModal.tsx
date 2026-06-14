@@ -2,6 +2,21 @@
 
 import { useEffect, useState } from "react";
 
+function SmsToast() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setShow(true), 1200);
+    return () => clearTimeout(t);
+  }, []);
+  if (!show) return null;
+  return (
+    <div className="mt-3 flex items-center gap-2 rounded-lg px-3 py-2 text-xs animate-in" style={{ background: "var(--brand-soft)", color: "var(--brand-deep)" }}>
+      <span>📱</span>
+      <span>SMS receipt sent to your phone</span>
+    </div>
+  );
+}
+
 export type OpayModalProps = {
   open: boolean;
   onClose: () => void;
@@ -9,11 +24,13 @@ export type OpayModalProps = {
   recipient: string;       // displayed as "Pay …"
   description?: string;
   payerName?: string;      // shown in success state
+  payerEmail?: string;
+  eventId?: string;        // threaded into the Trust Ledger entry for audit trail
   onSuccess?: (txId: string) => void;
 };
 
 // Mocked OPay wallet flow. Locked brand greens keep it believable.
-export function OpayModal({ open, onClose, amount, recipient, description, payerName, onSuccess }: OpayModalProps) {
+export function OpayModal({ open, onClose, amount, recipient, description, payerName, payerEmail, eventId, onSuccess }: OpayModalProps) {
   const [step, setStep] = useState<"review" | "pin" | "processing" | "success">("review");
   const [pin, setPin] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -170,11 +187,21 @@ export function OpayModal({ open, onClose, amount, recipient, description, payer
            </div>
             <div className="mt-4 text-base font-bold" style={{ color: "var(--navy)" }}>₦{amount.toLocaleString("en-NG")} sent</div>
             <div className="mt-1 text-xs" style={{ color: "var(--slate-600)" }}>{payerName ? `${payerName} · ` : ""}Trust Ledger updated</div>
-            <button
-              onClick={onClose}
-              className="mt-5 inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white"
-              style={{ background: "var(--brand)" }}
-            >Done</button>
+              <SmsToast />
+            <div className="mt-5 flex gap-2">
+              <button
+                onClick={() => window.print()}
+                className="flex-1 inline-flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold"
+                style={{ background: "var(--slate-50)", color: "var(--navy)" }}
+              >
+                🖨️ Receipt
+              </button>
+              <button
+                onClick={onClose}
+                className="flex-1 inline-flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white"
+                style={{ background: "var(--brand)" }}
+              >Done</button>
+            </div>
          </div>
         )}
      </div>

@@ -61,18 +61,23 @@ export default async function ContributePage({ params }: { params: Promise<{ id:
 
       <div className="md:col-span-2 space-y-6">
         <Card>
-          <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--slate-400)" }}>Why OPay</div>
-          <div className="mt-2 text-sm leading-relaxed" style={{ color: "var(--navy)" }}>
-            One tap, one wallet. Your receipt is sealed on the Trust Ledger — neither side
-            can rewrite it without detection.
-        </div>
-      </Card>
+          <div className="flex items-center gap-2">
+            <span className="grid place-items-center w-6 h-6 rounded-md text-white text-[10px] font-black" style={{ background: "var(--brand)" }}>O</span>
+            <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--slate-400)" }}>Why OPay is the spine</div>
+          </div>
+          <div className="mt-3 text-sm leading-relaxed space-y-2" style={{ color: "var(--slate-600)" }}>
+            <p>OPay Wallet moves every naira. Your transaction ID is sealed into the Trust Ledger's SHA256 chain — swap OPay and the hash proof breaks.</p>
+            <p className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: "var(--brand-deep)" }}>
+              <span>🔗</span> OPay TX ID anchored on-ledger
+            </p>
+          </div>
+        </Card>
         <Card>
           <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--slate-400)" }}>What you get</div>
           <ul className="mt-3 text-sm space-y-2" style={{ color: "var(--slate-600)" }}>
             <li className="flex items-start gap-2"><span style={{ color: "var(--brand)" }}>✓</span> Full refund within 24 hours</li>
             <li className="flex items-start gap-2"><span style={{ color: "var(--brand)" }}>✓</span> Hash-anchored receipt on Trust Ledger</li>
-            <li className="flex items-start gap-2"><span style={{ color: "var(--brand)" }}>✓</span> SMS + email confirmation</li>
+            <li className="flex items-start gap-2"><span style={{ color: "var(--brand)" }}>✓</span> SMS sent to your phone (simulated)</li>
             <li className="flex items-start gap-2"><span style={{ color: "var(--brand)" }}>✓</span> Same view as the organiser</li>
         </ul>
       </Card>

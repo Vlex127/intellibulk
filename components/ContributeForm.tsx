@@ -9,7 +9,7 @@ type Props = {
   recipient: string;
   description: string;
   payerName: string;
-  payerEmail: string;
+  payerEmail?: string;
 };
 
 export function ContributeForm({ eventId, amount, recipient, description, payerName, payerEmail }: Props) {
@@ -44,6 +44,8 @@ export function ContributeForm({ eventId, amount, recipient, description, payerN
         recipient={recipient}
         description={description}
         payerName={payerName}
+        payerEmail={payerEmail}
+        eventId={eventId}
       />
   </div>
   );

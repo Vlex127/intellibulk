@@ -105,6 +105,10 @@ html, body {
   50% { opacity: 1; }
 }
 
+.animate-in {
+  animation: receipt-in 0.4s ease-out both;
+}
+
 .ledger-vine {
   background:
     radial-gradient(1200px 400px at 50% -200px, rgba(11, 190, 98, 0.06), transparent 60%),

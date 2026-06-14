@@ -4,7 +4,7 @@
 
 import { createHash } from "node:crypto";
 
-export type LedgerKind = "contribution" | "payout" | "creation" | "match";
+export type LedgerKind = "contribution" | "payout" | "creation" | "match" | "refund";
 
 export type LedgerEntry = {
   index: number;            // 0, 1, 2 ... (0 = genesis)

@@ -4,6 +4,7 @@ import { DEMO_EVENT, DEMO_PARENTS, formatNaira, seedLedgerIfNeeded, eventTotals 
 import { list, verify, shortHash } from "@/lib/ledger";
 import { Card, LiveDot, TrustSeal } from "@/components/Brand";
 import { HashBadge } from "@/components/HashBadge";
+import { RefundButton } from "@/components/RefundButton";
 
 export default async function EventPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -58,7 +59,10 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
         <Card className="lg:col-span-2">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--slate-400)" }}>Capital pipeline</div>
+              <div className="flex items-center gap-2">
+            <span className="grid place-items-center w-5 h-5 rounded text-white text-[9px] font-black" style={{ background: "var(--brand)" }}>O</span>
+            <div className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--slate-400)" }}>Capital pipeline</div>
+          </div>
               <div className="mt-1 text-2xl font-bold tracking-tight hash-mono" style={{ color: "var(--navy)" }}>
                 {formatNaira(totals.raised)} <span style={{ color: "var(--slate-400)" }}>of {formatNaira(DEMO_EVENT.targetNaira)}</span>
             </div>
@@ -144,6 +148,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
                   <th className="py-2 text-xs uppercase tracking-wide font-semibold">Status</th>
                   <th className="py-2 text-xs uppercase tracking-wide font-semibold text-right">Paid</th>
                   <th className="py-2 text-xs uppercase tracking-wide font-semibold text-right">Outstanding</th>
+                  <th className="py-2 text-xs uppercase tracking-wide font-semibold text-right">Action</th>
                </tr>
              </thead>
               <tbody className="divide-y" style={{ borderColor: "var(--slate-100)" }}>
@@ -158,7 +163,14 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
                      </td>
                       <td className="py-3 text-right hash-mono" style={{ color: "var(--navy)" }}>{formatNaira(p.paid)}</td>
                       <td className="py-3 text-right hash-mono" style={{ color: out > 0 ? "var(--ember)" : "var(--slate-400)" }}>{formatNaira(out)}</td>
-                   </tr>
+                      <td className="py-3 text-right">
+                        {p.paid > 0 ? (
+                          <RefundButton parentName={p.name} amount={p.paid} eventId={DEMO_EVENT.id} />
+                        ) : (
+                          <span className="text-xs" style={{ color: "var(--slate-400)" }}>—</span>
+                        )}
+                      </td>
+                    </tr>
                   );
                 })}
              </tbody>
