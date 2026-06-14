@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  /* IntelliBulk brand — warm Nigerian fintech, OPay-friendly */
+  --background: #fafaf7;
+  --foreground: #0a1628;
+  --brand: #0bbe62;          /* OPay green */
+  --brand-deep: #068a47;
+  --brand-soft: #e6f9ee;
+  --ember: #ff6b1f;          /* warm accent */
+  --ember-soft: #fff1e8;
+  --navy: #0a1628;
+  --slate-50: #f8fafb;
+  --slate-100: #eef2f1;
+  --slate-200: #dde4e1;
+  --slate-400: #8a958f;
+  --slate-600: #4a5550;
+  --danger: #c81e3a;
+  --gold: #e0a000;
+
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  --shadow-card: 0 1px 2px rgba(10, 22, 40, 0.04), 0 8px 24px rgba(10, 22, 40, 0.06);
+  --shadow-lift: 0 4px 14px rgba(10, 22, 40, 0.08), 0 16px 40px rgba(10, 22, 40, 0.10);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-soft: var(--brand-soft);
+  --color-ember: var(--ember);
+  --color-ember-soft: var(--ember-soft);
+  --color-navy: var(--navy);
+  --color-slate-50: var(--slate-50);
+  --color-slate-100: var(--slate-100);
+  --color-slate-200: var(--slate-200);
+  --color-slate-400: var(--slate-400);
+  --color-slate-600: var(--slate-600);
+  --color-danger: var(--danger);
+  --color-gold: var(--gold);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Trust Ledger monospace look for hashes */
+.hash-mono {
+  font-family: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  letter-spacing: -0.02em;
+}
+
+/* Smooth focus ring for accessibility, but subtle */
+*:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Subtle line waiting for animation */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(11, 190, 98, 0.4); }
+  70% { box-shadow: 0 0 0 16px rgba(11, 190, 98, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(11, 190, 98, 0); }
+}
+.live-dot {
+  animation: pulse-ring 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Soft marquee for the "many ops/sec" trust signal */
+@keyframes drift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee {
+  animation: drift 28s linear infinite;
+}
+
+/* Authenticity: trust receipt fade-in */
+@keyframes receipt-in {
+  0% { opacity: 0; transform: translateY(6px) scale(0.99); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.receipt {
+  animation: receipt-in 0.6s ease-out both;
+}
+
+/* Background twinkles for the hero panel */
+@keyframes shimmer {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.ledger-vine {
+  background:
+    radial-gradient(1200px 400px at 50% -200px, rgba(11, 190, 98, 0.06), transparent 60%),
+    radial-gradient(800px 300px at 100% 100%, rgba(255, 107, 31, 0.05), transparent 60%);
+}
